@@ -49,13 +49,13 @@ class LinearRegression():
         # Prevent division by zero error
         if bdem != 0:
             # Calculate the slope and the y-intercept
-            self.slope = bnum/bdem
-            self.yint = avgy - self.slope*avgx
+            self.slope = round(bnum/bdem, 12)
+            self.yint = round(avgy - self.slope*avgx, 12)
             self.isVertical = False
         else:
             # If the line is vertical, calculate the x-intercept
             self.isVertical = True
-            self.xint = x[0]
+            self.xint = round(x[0], 12)
 
     # Calculate the accuracy of the estimated line
     def calc_cor_coef(self):
@@ -88,7 +88,7 @@ class LinearRegression():
         # Prevent division by zero error
         if rdem != 0:
             # Calculate the correlation coefficient
-            self.cor_coef = rnum/rdem
+            self.cor_coef = round(rnum/rdem, 12)
         else:
             # If the denominator = 0, the correlation coefficient is undefined
             self.cor_coef = "undefined"
@@ -199,9 +199,9 @@ if input("Graph the line? (y/n): ") == "y":
         turtle.goto(0, max(min(-abs(slope*110), -110), -210))
         turtle.home()
         if linReg.slope > 0:
-            turtle.write(str(yint) + " ", align='right', font=font)
+            turtle.write("%0.2f " % yint, align='right', font=font)
         else:
-            turtle.write(" " + str(yint), align='left', font=font)   
+            turtle.write(" %0.2f" % yint, align='left', font=font)   
 
         # Determine the scale of the y-intercept
         if yint > 0:
@@ -244,7 +244,7 @@ if input("Graph the line? (y/n): ") == "y":
         turtle.goto(xint, 0)
 
         # Write orginal value of the x-intercept    
-        turtle.write(" " + str(linReg.xint), align='left', font=font)
+        turtle.write(" %0.2f" % linReg.xint, align='left', font=font)
         
         turtle.penup()
 
