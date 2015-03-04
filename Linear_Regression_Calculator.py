@@ -183,15 +183,20 @@ if input("Graph the line? (y/n): ") == "y":
         yint = linReg.yint
         
         # Draw the estimated line
-        turtle.goto(100, slope*100)
-        turtle.goto(-100, slope*-100)
+
+        if slope > 2:
+            turtle.goto(200/slope, 200)
+            turtle.goto(-200/slope, -200)
+        else:
+            turtle.goto(100, slope*100)
+            turtle.goto(-100, slope*-100)
         turtle.home()
 
         # Draw the y-axis
         turtle.width(1)
-        turtle.goto(0, max(abs(slope*110), 110))
+        turtle.goto(0, min(max(abs(slope*110), 110), 210))
         turtle.write("y", font=font)
-        turtle.goto(0, min(-abs(slope*110), -110))
+        turtle.goto(0, max(min(-abs(slope*110), -110), -210))
         turtle.home()
         if linReg.slope > 0:
             turtle.write(str(yint) + " ", align='right', font=font)
